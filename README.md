@@ -4,4 +4,4 @@ Difference Calculator v 1.0.1
 
 <a href="https://travis-ci.org/YuriySho/project-lvl2-s451.svg?branch=master"><img src="https://travis-ci.org/YuriySho/project-lvl2-s451.svg?branch=master" /></a>
 
-https://travis-ci.org/YuriySho/project-lvl2-s451.svg?branch=master
+<a href="https://travis-ci.org/YuriySho/project-lvl2-s451.svg?branch=master"><img src="https://asciinema.org/a/14.png" width="200"/></a>
