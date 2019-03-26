@@ -1,9 +1,6 @@
 import fs from 'fs';
 import _ from 'lodash';
 
-const beforePath = '_tests_/_fixtures_/before.json';
-const afterPath = '_tests_/_fixtures_/after.json';
-
 export default (beforePath, afterPath) => {
   const objBefore = JSON.parse(fs.readFileSync(beforePath, 'utf-8'));
   const objAfter = JSON.parse(fs.readFileSync(afterPath, 'utf-8'));
