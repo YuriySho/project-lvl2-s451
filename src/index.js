@@ -1,9 +1,13 @@
 import fs from 'fs';
 import _ from 'lodash';
+import path from 'path';
+import parser from './parser';
 
 export default (beforePath, afterPath) => {
-  const objBefore = JSON.parse(fs.readFileSync(beforePath, 'utf-8'));
-  const objAfter = JSON.parse(fs.readFileSync(afterPath, 'utf-8'));
+  const getFormat = filePath => path.extname(filePath);
+  const getData = filePath => fs.readFileSync(filePath, 'utf-8');
+  const objBefore = parser(getData(beforePath), getFormat(beforePath));
+  const objAfter = parser(getData(afterPath), getFormat(afterPath));
   const keysArr = _.union(Object.keys(objBefore), (Object.keys(objAfter)));
   const reduced = keysArr.reduce((acc, key) => {
     if (_.has(objBefore, key) && _.has(objAfter, key) && objBefore[key] === objAfter[key]) {
