@@ -3,9 +3,10 @@ import _ from 'lodash';
 import path from 'path';
 import parser from './parser';
 
+const getFormat = filePath => path.extname(filePath);
+const getData = filePath => fs.readFileSync(filePath, 'utf-8');
+
 export default (beforePath, afterPath) => {
-  const getFormat = filePath => path.extname(filePath);
-  const getData = filePath => fs.readFileSync(filePath, 'utf-8');
   const objBefore = parser(getData(beforePath), getFormat(beforePath));
   const objAfter = parser(getData(afterPath), getFormat(afterPath));
   const keysArr = _.union(Object.keys(objBefore), (Object.keys(objAfter)));
