@@ -6,3 +6,7 @@ publish:
 	npm publish
 lint:
 	npx eslint .
+test:
+	npm test	
+watch:
+	npm run watch
