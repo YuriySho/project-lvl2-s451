@@ -87,7 +87,8 @@ export default (beforePath, afterPath) => {
       }
       return acc.join('\n');
     }, []);
-    return ['{', ...reduced, `${tab}}\n`].join('\n');
+    return ['{', ...reduced, `${tab}}`].join('\n');
   };
-  return render(ast);
+  const result = render(ast);
+  return ([result, '\n'].join(''));
 };
