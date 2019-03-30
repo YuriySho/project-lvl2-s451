@@ -1,10 +1,10 @@
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-const parse = {
+const parseList = {
   '.json': JSON.parse,
   '.yml': yaml.safeLoad,
   '.ini': ini.decode,
 };
 
-export default (data, format) => parse[format](data);
+export default (data, format) => parseList[format](data);
