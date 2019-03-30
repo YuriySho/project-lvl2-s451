@@ -1,6 +1,7 @@
 import fs from 'fs';
 import genDiff from '../src';
 
+
 describe('get difference', () => {
   const resultPath = '__tests__/__fixtures__/result.txt';
   const beforePathJson = '__tests__/__fixtures__/before.json';
@@ -16,22 +17,36 @@ describe('get difference', () => {
   const afterPathJYmlTree = '__tests__/__fixtures__/afterTree.yml';
   const beforePathIniTree = '__tests__/__fixtures__/beforeTree.ini';
   const afterPathIniTree = '__tests__/__fixtures__/afterTree.ini';
+  const resultPlainPath = '__tests__/__fixtures__/resultPlain.txt';
+  const resultPlainPathTree = '__tests__/__fixtures__/resultPlainTree.txt';
   const result = fs.readFileSync(resultPath, 'utf8');
   const resultTree = fs.readFileSync(resultPathTree, 'utf8');
+  const resultPlain = fs.readFileSync(resultPlainPath, 'utf8');
+  const resultPlainTree = fs.readFileSync(resultPlainPathTree, 'utf8');
+  const formatTree = 'tree';
+  const formatPlain = 'plain';
 
-  test.each([[beforePathJson, afterPathJson], [beforePathYml, afterPathJYml],
-    [beforePathIni, afterPathIni]])(
-    'get difference simple formet',
-    (beforePath, afterPath) => {
-      expect(genDiff(beforePath, afterPath)).toBe(result);
+  test.each([[beforePathJson, afterPathJson, formatTree, result],
+    [beforePathYml, afterPathJYml, formatTree, result],
+    [beforePathIni, afterPathIni, formatTree, result],
+    [beforePathJson, afterPathJson, formatPlain, resultPlain],
+    [beforePathYml, afterPathJYml, formatPlain, resultPlain],
+    [beforePathIni, afterPathIni, formatPlain, resultPlain]])(
+    'get difference simple ',
+    (beforePath, afterPath, format, expected) => {
+      expect(genDiff(beforePath, afterPath, format)).toBe(expected);
     },
   );
 
-  test.each([[beforePathJsonTree, afterPathJsonTree], [beforePathYmlTree, afterPathJYmlTree],
-    [beforePathIniTree, afterPathIniTree]])(
-    'get difference tree formet',
-    (beforePath, afterPath) => {
-      expect(genDiff(beforePath, afterPath)).toBe(resultTree);
+  test.each([[beforePathJsonTree, afterPathJsonTree, formatPlain, resultPlainTree],
+    [beforePathYmlTree, afterPathJYmlTree, formatPlain, resultPlainTree],
+    [beforePathIniTree, afterPathIniTree, formatPlain, resultPlainTree],
+    [beforePathJsonTree, afterPathJsonTree, formatTree, resultTree],
+    [beforePathYmlTree, afterPathJYmlTree, formatTree, resultTree],
+    [beforePathIniTree, afterPathIniTree, formatTree, resultTree]])(
+    'get difference nodes',
+    (beforePath, afterPath, format, expected) => {
+      expect(genDiff(beforePath, afterPath, format)).toBe(expected);
     },
   );
 });
