@@ -19,19 +19,27 @@ describe('get difference', () => {
   const afterPathIniTree = '__tests__/__fixtures__/afterTree.ini';
   const resultPlainPath = '__tests__/__fixtures__/resultPlain.txt';
   const resultPlainPathTree = '__tests__/__fixtures__/resultPlainTree.txt';
+  const resultPathJson = '__tests__/__fixtures__/resultJson.txt';
+  const resultPathTreeJson = '__tests__/__fixtures__/resultTreeJson.txt';
   const result = fs.readFileSync(resultPath, 'utf8');
   const resultTree = fs.readFileSync(resultPathTree, 'utf8');
   const resultPlain = fs.readFileSync(resultPlainPath, 'utf8');
   const resultPlainTree = fs.readFileSync(resultPlainPathTree, 'utf8');
+  const resultJson = fs.readFileSync(resultPathJson, 'utf8');
+  const resultTreeJson = fs.readFileSync(resultPathTreeJson, 'utf8');
   const formatTree = 'tree';
   const formatPlain = 'plain';
+  const formatJson = 'json';
 
   test.each([[beforePathJson, afterPathJson, formatTree, result],
     [beforePathYml, afterPathJYml, formatTree, result],
     [beforePathIni, afterPathIni, formatTree, result],
     [beforePathJson, afterPathJson, formatPlain, resultPlain],
     [beforePathYml, afterPathJYml, formatPlain, resultPlain],
-    [beforePathIni, afterPathIni, formatPlain, resultPlain]])(
+    [beforePathIni, afterPathIni, formatPlain, resultPlain],
+    [beforePathJson, afterPathJson, formatJson, resultJson],
+    [beforePathYml, afterPathJYml, formatJson, resultJson],
+    [beforePathIni, afterPathIni, formatJson, resultJson]])(
     'get difference simple ',
     (beforePath, afterPath, format, expected) => {
       expect(genDiff(beforePath, afterPath, format)).toBe(expected);
@@ -43,7 +51,10 @@ describe('get difference', () => {
     [beforePathIniTree, afterPathIniTree, formatPlain, resultPlainTree],
     [beforePathJsonTree, afterPathJsonTree, formatTree, resultTree],
     [beforePathYmlTree, afterPathJYmlTree, formatTree, resultTree],
-    [beforePathIniTree, afterPathIniTree, formatTree, resultTree]])(
+    [beforePathIniTree, afterPathIniTree, formatTree, resultTree],
+    [beforePathJsonTree, afterPathJsonTree, formatJson, resultTreeJson],
+    [beforePathYmlTree, afterPathJYmlTree, formatJson, resultTreeJson],
+    [beforePathIniTree, afterPathIniTree, formatJson, resultTreeJson]])(
     'get difference nodes',
     (beforePath, afterPath, format, expected) => {
       expect(genDiff(beforePath, afterPath, format)).toBe(expected);

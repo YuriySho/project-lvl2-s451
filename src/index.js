@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import parser from './parser';
-import render from './renders/render';
+import render from './renderers';
 import buildAst from './buildAst';
 
 const getFormat = filePath => path.extname(filePath);
