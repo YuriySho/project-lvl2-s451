@@ -1,6 +1,6 @@
 {
   "name": "diff-calc-yuriysho",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"

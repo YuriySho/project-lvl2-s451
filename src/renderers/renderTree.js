@@ -26,11 +26,11 @@ const renderTree = (nodes, depth = 1) => {
         return `${indent}  ${node.name}: ${stringify(node.valueBefore, indent)}`;
       case 'changed':
         return [`${indent}- ${node.name}: ${stringify(node.valueBefore, indent)}`,
-          `${indent}+ ${node.name}: ${stringify(node.valueAfter, indent)}`].join('\n');
+          `${indent}+ ${node.name}: ${stringify(node.valueAfter, indent)}`];
       default: throw new Error(`Invalid type '${node.type}'`);
     }
   });
-  return ['{', ...mapped, `${tab}}`].join('\n');
+  return _.flatten(['{', ...mapped, `${tab}}`]).join('\n');
 };
 
 export default renderTree;
